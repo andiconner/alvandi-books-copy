@@ -13,13 +13,17 @@ const typeDefs = gql`
     authors: String
     img: String
     quantity: Int
-    price: Number
+    price: Float
     category: Category
   }
 
   type Order {
     _id: ID
-    purchaseDate: String
+    books: [Book]
+  }
+
+  type Cart {
+    userId: ID
     books: [Book]
   }
 
@@ -47,6 +51,7 @@ const typeDefs = gql`
     book(_id: ID!): Book
     user: User
     order(_id: ID!): Order
+    cart(_id: ID!): Cart
     checkout(products: [ID]!): Checkout
   }
 
