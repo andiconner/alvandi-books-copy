@@ -8,15 +8,14 @@ const orderSchema = new mongoose.Schema(
     },
     books: [
       {
-        bookId: {
-          type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Book'
         },
-        quantity: {
-          type: Number,
-          default: 1,
-        },
-      },
     ],
+    quantity: {
+      type: Number,
+      default: 1,
+    },
     amount: { 
         type: Number, 
         required: true 
