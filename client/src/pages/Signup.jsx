@@ -1,7 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState }from 'react';
 import styled from "styled-components";
 import { mobile } from "../utils/responsive";
+
+import Auth from '../utils/auth';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
 
 
 const Container = styled.div`
@@ -57,25 +60,99 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
+  background-color:#048EA9; 
 `;
 
+const Error = styled.span`
+  color: red;
+`;
+
+const Alert = styled.span`
+  color: red;
+`;
+
+
 const Signup = () => {
+  // set initial form state
+  const [formState, setFormState] = useState({ firstName: '', lastName: '', username: '', email: '', password: '' });
+   // define mutation for adding a user
+  const [addUser, { error }] = useMutation(ADD_USER);
+// update state based on form input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({ 
+      ...formState,
+      [name]: value,
+     });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    // check if form has everything (as per react-bootstrap docs)
+    try {
+      const { data } = await addUser({
+        variables: { ...formState }
+      });
+
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
+    }
+
+  };
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
-        <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-  
+        <Form onSubmit={handleFormSubmit}>
+        
+          <Input 
+            placeholder="name"
+            type='name'
+            onChange={handleChange}
+            value={formState.name}
+            required 
+          />
+          <Input 
+            placeholder="last name"
+            type='lastName'
+            onChange={handleChange}
+            value={formState.lastName}
+            required  
+          />
+          <Input 
+            placeholder="username" 
+            type='username'
+            onChange={handleChange}
+            value={formState.username}
+            required 
+            />
+          <Input 
+            placeholder="email" 
+            type='email'
+            onChange={handleChange}
+            value={formState.email}
+            required 
+            />
+          <Input 
+            placeholder="password" 
+            type='password'
+            onChange={handleChange}
+            value={formState.password}
+            required 
+            />
+          
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button
+            type='submit'
+            variant='success'>
+            CREATE
+            </Button>
+            {error && <Error>Something went wrong...</Error>}
         </Form>
       </Wrapper>
     </Container>
