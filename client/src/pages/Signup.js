@@ -1,11 +1,10 @@
-import React, { useState }from 'react';
+import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../utils/responsive";
 
-import Auth from '../utils/auth';
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
-
+import Auth from "../utils/auth";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
 
 const Container = styled.div`
   width: 100vw;
@@ -14,21 +13,18 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url("https://i.ibb.co/NCmJRVC/back-signup.jpg")
-      center;
+    url("https://i.ibb.co/NCmJRVC/back-signup.jpg") center;
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-
 const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   background-color: white;
   ${mobile({ width: "75%" })}
-
 `;
 
 const Title = styled.h1`
@@ -60,7 +56,7 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
-  background-color:#048EA9; 
+  background-color: #048ea9;
 `;
 
 const Error = styled.span`
@@ -71,19 +67,24 @@ const Alert = styled.span`
   color: red;
 `;
 
-
 const Signup = () => {
   // set initial form state
-  const [formState, setFormState] = useState({ firstName: '', lastName: '', username: '', email: '', password: '' });
-   // define mutation for adding a user
+  const [formState, setFormState] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+  // define mutation for adding a user
   const [addUser, { error }] = useMutation(ADD_USER);
-// update state based on form input changes
+  // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormState({ 
+    setFormState({
       ...formState,
       [name]: value,
-     });
+    });
   };
 
   const handleFormSubmit = async (event) => {
@@ -92,67 +93,63 @@ const Signup = () => {
     // check if form has everything (as per react-bootstrap docs)
     try {
       const { data } = await addUser({
-        variables: { ...formState }
+        variables: { ...formState },
       });
 
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
-
   };
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form onSubmit={handleFormSubmit}>
-        
-          <Input 
+          <Input
             placeholder="name"
-            type='name'
+            type="name"
             onChange={handleChange}
             value={formState.name}
-            required 
+            required
           />
-          <Input 
+          <Input
             placeholder="last name"
-            type='lastName'
+            type="lastName"
             onChange={handleChange}
             value={formState.lastName}
-            required  
+            required
           />
-          <Input 
-            placeholder="username" 
-            type='username'
+          <Input
+            placeholder="username"
+            type="username"
             onChange={handleChange}
             value={formState.username}
-            required 
-            />
-          <Input 
-            placeholder="email" 
-            type='email'
+            required
+          />
+          <Input
+            placeholder="email"
+            type="email"
             onChange={handleChange}
             value={formState.email}
-            required 
-            />
-          <Input 
-            placeholder="password" 
-            type='password'
+            required
+          />
+          <Input
+            placeholder="password"
+            type="password"
             onChange={handleChange}
             value={formState.password}
-            required 
-            />
-          
+            required
+          />
+
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button
-            type='submit'
-            variant='success'>
+          <Button type="submit" variant="success">
             CREATE
-            </Button>
-            {error && <Error>Something went wrong...</Error>}
+          </Button>
+          {error && <Error>Something went wrong...</Error>}
         </Form>
       </Wrapper>
     </Container>

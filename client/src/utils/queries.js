@@ -1,4 +1,5 @@
-import { gql } from '@apollo/client';
+// import { gql } from '@apollo/client';
+import gql from "graphql-tag";
 
 export const QUERY_BOOKS = gql`
   query getBooks($category: ID) {
