@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
+
 import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
 import { mobile } from "../utils/responsive";
@@ -93,22 +93,20 @@ const Button = styled.button`
   }
 `;
 
-const Book = () => {
+const Book = (item) => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [book, setBook] = useState({});
   const [quantity, setQuantity] = useState(1);
   //const dispatch = useDispatch();
 
-  //useEffect(() => {
-   // const getBook = async () => {
-    //  try {
-    //    const res = await publicRequest.get("/books/find/" + id);
-    //    setBook(res.data);
-    //  } catch {}
-   // };
-   // getBook();
-  //}, [id]);
+  const {
+    title,
+    authors,
+    img,
+    price,
+    //quantity
+  } = item;
 
   const handleQuantity = (type) => {
     if (type === "dec") {
