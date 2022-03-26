@@ -109,34 +109,39 @@ const Signup = () => {
         
           <Input 
             placeholder="name"
-            type='name'
+            name='firstName'
+            type = 'text'
             onChange={handleChange}
             value={formState.name}
             required 
           />
           <Input 
             placeholder="last name"
-            type='lastName'
+            name='lastName'
+            type = 'text'
             onChange={handleChange}
             value={formState.lastName}
             required  
           />
           <Input 
             placeholder="username" 
-            type='username'
+            name='username'
+            type = 'text'
             onChange={handleChange}
             value={formState.username}
             required 
             />
           <Input 
             placeholder="email" 
-            type='email'
+            name='email'
+            type = 'email'
             onChange={handleChange}
             value={formState.email}
             required 
             />
           <Input 
             placeholder="password" 
+            name='password'
             type='password'
             onChange={handleChange}
             value={formState.password}
