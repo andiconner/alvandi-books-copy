@@ -21,9 +21,11 @@
   },
   "homepage": "https://github.com/andiconner/alvandi-books-copy#readme",
   "devDependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "db-seed": "^1.2.0"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "seed": "^0.4.4"
   }
 }

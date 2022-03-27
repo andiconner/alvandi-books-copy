@@ -116,10 +116,16 @@ const Book = (item) => {
     }
   };
 
-  const handleClick = () => {
-    //dispatch(
-     // addBook({ ...book, quantity })
-    //);
+  // const handleClick = () => {
+     // dispatch(
+    //  addBook({ ...book, quantity })
+    // );
+    const shoot = () => {
+      
+      alert("Great Shot!");
+    // dispatch(
+    //  addBook({ ...book, quantity })
+    // );
   };
 
 
@@ -143,7 +149,7 @@ const Book = (item) => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
-            <Button onClick={handleClick}>ADD TO CART</Button>
+            <Button onClick={shoot}>ADD TO CART</Button>
           </AddContainer>
           </InfoContainer>
         </Wrapper>

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "seed": "node config/seeds.js"
   },
   "author": "Alvaro Calvo and Andi Conner",
   "license": "ISC",
@@ -18,10 +19,11 @@
     "faker": "^4.1.0",
     "graphql": "^15.8.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.13",
+    "mongoose": "^6.2.8",
     "stripe": "^8.174.0"
   },
   "devDependencies": {
+    "db-seed": "^1.2.0",
     "nodemon": "^2.0.3"
   }
 }
