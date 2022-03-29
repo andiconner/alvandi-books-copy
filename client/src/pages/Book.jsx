@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Remove } from "@material-ui/icons"; //Change Book
 import styled from "styled-components";
 
 import Footer from "../components/Footer";
@@ -9,8 +9,10 @@ import { mobile } from "../utils/responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 //import { publicRequest } from "../requestMethods";
-import { addBook } from "../redux/cartRedux";
-import { useDispatch } from "react-redux";
+import { allBooks } from "../utils/data";
+import { useParams } from 'react-router-dom'
+// import { useDispatch } from "react-redux";
+
 
 
 const Container = styled.div``;
@@ -95,10 +97,13 @@ const Button = styled.button`
 
 const Book = (item) => {
   const location = useLocation();
-  const id = location.pathname.split("/")[2];
-  const [book, setBook] = useState({});
+  const {id} = useParams ()
+  // const id = location.pathname.split("/")[2];
+  // const [book, setBook] = useState({});
+  const book = allBooks.find(book => book.id == id);
   const [quantity, setQuantity] = useState(1);
-  //const dispatch = useDispatch();
+ 
+console.log (id)
 
   const {
     title,

@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_BOOKS = gql`
-  query getBooks($category: ID) {
-    books(category: $category) {
+export const QUERY_BOOK = gql`
+  query getBook($id: ID) {
+    book(id: $id) {
         _id
         title
         description
